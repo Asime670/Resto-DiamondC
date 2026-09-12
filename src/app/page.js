@@ -1,69 +1,243 @@
-import Image from "next/image";
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
+import { getMenuItems } from '@/lib/menuStore';
+import FoodCard from '@/components/public/FoodCard';
+import Button from '@/components/ui/Button';
 
 export default function Home() {
+  const { t } = useLanguage();
+  const [signatureDishes, setSignatureDishes] = useState(() => {
+    const items = getMenuItems();
+    const preview = items.filter((d) => d.isSignature || d.badge).slice(0, 4);
+    return preview.length > 0 ? preview : items.slice(0, 4);
+  });
+
+  useEffect(() => {
+    const handleMenuSync = () => {
+      const items = getMenuItems();
+      const preview = items.filter((d) => d.isSignature || d.badge).slice(0, 4);
+      setSignatureDishes(preview.length > 0 ? preview : items.slice(0, 4));
+    };
+
+    window.addEventListener('menu_updated', handleMenuSync);
+    return () => window.removeEventListener('menu_updated', handleMenuSync);
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="flex flex-col w-full bg-[#0B0B0B] text-zinc-100 overflow-hidden">
+      {/* 1. HERO SECTION */}
+      <section className="relative w-full min-h-[88vh] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
+        {/* Background Image with Dark Brown Shade Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-bg.jpg"
+            alt="Diamond C Luxury Restaurant Interior"
+            fill
+            priority
+            className="object-cover object-center filter brightness-45 scale-105 animate-pulse-slow"
+          />
+          {/* Multi-layered dark & warm brown gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0B]/90 via-[#1A120B]/80 to-[#0B0B0B]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#D4AF37]/10 via-transparent to-transparent pointer-events-none" />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center gap-6">
+          {/* Luxury Tag Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#D4AF37]/40 bg-[#1A120B]/90 text-xs sm:text-sm font-medium text-[#E5C158] shadow-lg shadow-black/50 backdrop-blur-sm">
+            <span className="text-[#D4AF37]">✦</span>
+            <span>{t.hero.tag}</span>
+            <span className="text-[#D4AF37]">✦</span>
+          </div>
+
+          {/* Primary Gold Headings */}
+          <div className="space-y-2">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-serif tracking-tight gold-gradient-text drop-shadow-2xl">
+              {t.hero.welcome}
+            </h1>
+            <p className="text-xl sm:text-2xl lg:text-3xl text-[#F4E6B3] font-serif italic tracking-wide">
+              {t.hero.tagline}
+            </p>
+          </div>
+
+          {/* Subtitle */}
+          <p className="text-sm sm:text-base md:text-lg text-zinc-300 max-w-2xl leading-relaxed font-light">
+            {t.hero.subtitle}
           </p>
+
+          {/* Location & Opening Hours Pill */}
+          <div className="text-xs sm:text-sm text-[#D4AF37]/90 font-medium tracking-wider uppercase border-y border-[#D4AF37]/20 py-1.5 px-6">
+            {t.hero.signatureNotice}
+          </div>
+
+          {/* Call-To-Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
+            <Link href="/menu">
+              <Button variant="gold" size="lg" className="w-full sm:w-auto px-8">
+                {t.hero.exploreMenu}
+              </Button>
+            </Link>
+            <Link href="/reservation">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto px-8">
+                {t.hero.reserveTable}
+              </Button>
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-400 text-xs pointer-events-none">
+          <span className="tracking-widest uppercase text-[10px] text-[#D4AF37]/70">Scroll Down</span>
+          <div className="w-4 h-7 rounded-full border border-[#D4AF37]/40 flex items-start justify-center p-1">
+            <div className="w-1 h-2 bg-[#D4AF37] rounded-full animate-bounce" />
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* 2. DIAMOND C STORY SECTION */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-12 bg-[#1A120B] border-t border-b border-[#D4AF37]/25 relative">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Text Content */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">
+              <span>✦</span>
+              <span>{t.story.tag}</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-wide">
+              {t.story.title}
+            </h2>
+
+            <p className="text-base sm:text-lg text-[#E5C158] font-serif italic">
+              &ldquo;{t.story.subtitle}&rdquo;
+            </p>
+
+            <div className="w-24 h-1 bg-gradient-to-r from-[#D4AF37] to-transparent rounded" />
+
+            <div className="space-y-4 text-sm sm:text-base text-zinc-300 leading-relaxed">
+              <p>{t.story.p1}</p>
+              <p>{t.story.p2}</p>
+              <p>{t.story.p3}</p>
+            </div>
+
+            {/* VIP Lounge highlight card */}
+            <div className="p-5 rounded-xl bg-[#2C1E12] border border-[#D4AF37]/30 shadow-md flex items-start gap-4 mt-4">
+              <div className="text-2xl text-[#D4AF37]">👑</div>
+              <div className="space-y-1">
+                <h4 className="text-sm font-bold font-serif text-[#E5C158]">
+                  {t.story.loungeTitle}
+                </h4>
+                <p className="text-xs text-zinc-400">
+                  {t.story.loungeDesc}
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <Link href="/menu">
+                <Button variant="gold">
+                  {t.story.button}
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Restaurant Space Image */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative h-[380px] sm:h-[480px] w-full rounded-2xl overflow-hidden border-2 border-[#D4AF37]/40 shadow-2xl shadow-black/80 group">
+              <Image
+                src="/images/story-interior.jpg"
+                alt="Diamond C Interior Space and VIP Dining"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              
+              {/* Image Overlaid Badge */}
+              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl backdrop-blur-md bg-[#0B0B0B]/80 border border-[#D4AF37]/30">
+                <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">Fine Dining Douala</p>
+                <p className="text-sm font-bold text-white font-serif">A Sanctuary of Cameroonian Gastronomy</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. EXPLORE MENU PREVIEW SECTION */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#0B0B0B] relative">
+        <div className="max-w-7xl mx-auto space-y-12">
+          {/* Header */}
+          <div className="text-center space-y-4 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">
+              <span>✦</span>
+              <span>Signature Delicacies (90% Cameroonian)</span>
+              <span>✦</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-bold font-serif gold-gradient-text">
+              {t.preview.title}
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-400">
+              {t.preview.subtitle}
+            </p>
+          </div>
+
+          {/* Preview Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+            {signatureDishes.map((dish) => (
+              <FoodCard key={dish.id} dish={dish} className="w-full max-w-[340px]" />
+            ))}
+          </div>
+
+          {/* View Full Menu CTA */}
+          <div className="text-center pt-8">
+            <Link href="/menu">
+              <Button variant="gold" size="lg" className="px-10 shadow-xl shadow-[#D4AF37]/20">
+                {t.preview.viewFullMenu}
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. HOSPITALITY HIGHLIGHTS BANNER */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#1A120B] via-[#2C1E12] to-[#1A120B] border-t border-b border-[#D4AF37]/20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+          <div className="p-6 rounded-2xl bg-[#0B0B0B]/60 border border-[#D4AF37]/20 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-2xl shrink-0">
+              🍲
+            </div>
+            <div>
+              <h4 className="text-base font-bold font-serif text-[#E5C158]">Authentic Cameroonian Terroir</h4>
+              <p className="text-xs text-zinc-400">Royal Achu, Eru, Poisson Braisé & Ndolé cooked with genuine ancestral spices.</p>
+            </div>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#0B0B0B]/60 border border-[#D4AF37]/20 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-2xl shrink-0">
+              🍷
+            </div>
+            <div>
+              <h4 className="text-base font-bold font-serif text-[#E5C158]">Royal Wine & Cigar Lounge</h4>
+              <p className="text-xs text-zinc-400">Exclusive private suites, fine cognac cocktails, and sommelier-selected vintages.</p>
+            </div>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#0B0B0B]/60 border border-[#D4AF37]/20 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-2xl shrink-0">
+              💬
+            </div>
+            <div>
+              <h4 className="text-base font-bold font-serif text-[#E5C158]">Instant WhatsApp Concierge</h4>
+              <p className="text-xs text-zinc-400">Instant table reservations and meal pre-orders directly with our dedicated maître d&apos;.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

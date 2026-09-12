@@ -4,21 +4,25 @@ export const DEFAULT_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "23760000
 
 /**
  * Generates a pre-filled WhatsApp URL for food ordering
- * @param {Object} dish - Dish object containing name, price, etc.
+ * Format: "Hello Diamond C! I would like to order: *[Dish Name]* (Price: [Price])."
+ * 
+ * @param {Object|string} dish - Dish object or dish name
  * @param {string} lang - 'en' or 'fr'
- * @param {string} phone - WhatsApp phone number with country code
- * @returns {string} WhatsApp URL
+ * @param {string} phone - WhatsApp phone number with country code (defaults to 237600000000)
+ * @returns {string} Encoded WhatsApp URL
  */
 export function getFoodOrderUrl(dish, lang = 'en', phone = DEFAULT_PHONE) {
-  const cleanPhone = phone.replace(/[^0-9]/g, '');
-  const dishName = typeof dish === 'string' ? dish : (lang === 'fr' ? (dish.nameFr || dish.name) : dish.name);
+  const cleanPhone = String(phone).replace(/[^0-9]/g, '');
+  const dishName = typeof dish === 'string' 
+    ? dish 
+    : (lang === 'fr' ? (dish.nameFr || dish.name) : dish.name);
   const dishPrice = typeof dish === 'object' && dish.price ? dish.price : '';
 
   let message = '';
   if (lang === 'fr') {
-    message = `Bonjour Diamond C ! Je souhaite commander : *${dishName}*${dishPrice ? ` (Prix: ${dishPrice})` : ''}.`;
+    message = `Bonjour Diamond C ! Je souhaite commander : *${dishName}* (Prix: ${dishPrice}).`;
   } else {
-    message = `Hello Diamond C! I would like to order: *${dishName}*${dishPrice ? ` (Price: ${dishPrice})` : ''}.`;
+    message = `Hello Diamond C! I would like to order: *${dishName}* (Price: ${dishPrice}).`;
   }
 
   return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
@@ -26,14 +30,22 @@ export function getFoodOrderUrl(dish, lang = 'en', phone = DEFAULT_PHONE) {
 
 /**
  * Generates a pre-filled WhatsApp URL for table reservation
- * @param {Object} reservation - Reservation details object
+ * Format:
+ * "Hello Diamond C! I would like to make a table reservation:
+ *  - *Name:* [Name]
+ *  - *Phone:* [Phone]
+ *  - *Guests:* [Number of persons]
+ *  - *Table Preference:* [Table type]
+ *  - *Date & Time:* [Date & Time]"
+ * 
+ * @param {Object} reservation - Reservation details
  * @param {string} lang - 'en' or 'fr'
- * @param {string} phone - WhatsApp phone number with country code
- * @returns {string} WhatsApp URL
+ * @param {string} phone - WhatsApp phone number with country code (defaults to 237600000000)
+ * @returns {string} Encoded WhatsApp URL
  */
 export function getReservationUrl(reservation, lang = 'en', phone = DEFAULT_PHONE) {
-  const cleanPhone = phone.replace(/[^0-9]/g, '');
-  const { name, phone: guestPhone, guests, preference, dateTime, notes } = reservation;
+  const cleanPhone = String(phone).replace(/[^0-9]/g, '');
+  const { name, phone: guestPhone, guests, preference, dateTime, notes } = reservation || {};
 
   let message = '';
   if (lang === 'fr') {

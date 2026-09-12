@@ -1,6 +1,6 @@
 import { initialMenuData } from '@/data/initialMenuData';
 
-const STORAGE_KEY = 'diamond_c_menu_items_v1';
+const STORAGE_KEY = 'diamond_c_menu_items_v2';
 
 export function getMenuItems() {
   if (typeof window === 'undefined') {
@@ -13,7 +13,12 @@ export function getMenuItems() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(initialMenuData));
       return initialMenuData;
     }
-    return JSON.parse(stored);
+    const parsed = JSON.parse(stored);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return parsed;
+    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(initialMenuData));
+    return initialMenuData;
   } catch (e) {
     console.error('Error loading menu items:', e);
     return initialMenuData;
@@ -41,6 +46,7 @@ export function createMenuItem(newItem) {
     ...newItem,
     id: newItem.id || `dish-${Date.now()}`,
     inStock: newItem.inStock !== false,
+    days: Array.isArray(newItem.days) && newItem.days.length > 0 ? newItem.days : ['Monday'],
   };
   const updated = [itemWithId, ...items];
   saveMenuItems(updated);
