@@ -104,19 +104,6 @@ export default function Home() {
               <p>{t.story.p3}</p>
             </div>
 
-            {/* VIP Lounge highlight card */}
-            <div className="p-5 rounded-xl bg-[#2C1E12] border border-[#D4AF37]/30 shadow-md flex items-start gap-4 mt-4">
-              <div className="text-2xl text-[#D4AF37]">👑</div>
-              <div className="space-y-1">
-                <h4 className="text-sm font-bold font-serif text-[#E5C158]">
-                  {t.story.loungeTitle}
-                </h4>
-                <p className="text-xs text-zinc-400">
-                  {t.story.loungeDesc}
-                </p>
-              </div>
-            </div>
-
             <div className="pt-2">
               <Link href="/menu">
                 <Button variant="gold">
@@ -183,9 +170,6 @@ export default function Home() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#1A120B] via-[#2C1E12] to-[#1A120B] border-t border-b border-[#D4AF37]/20">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="p-6 rounded-2xl bg-[#0B0B0B]/60 border border-[#D4AF37]/20 flex items-center gap-4">
-            {/* <div className="w-12 h-12 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-2xl shrink-0">
-              🍲
-            </div> */}
             <div>
               <h4 className="text-base font-bold font-serif text-[#E5C158]">Authentic Cameroonian Terroir</h4>
               <p className="text-xs text-zinc-400">Royal Achu, Eru, Poisson Braisé & Ndolé cooked with genuine ancestral spices.</p>

@@ -37,8 +37,8 @@ module.exports = {
         }
       },
       fontFamily: {
-        serif: ['var(--font-cinzel)', 'Georgia', 'serif'],
-        sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-cinzel)', 'Cormorant Garamond', 'Garamond', 'Georgia', 'serif'],
+        sans: ['var(--font-outfit)', 'Montserrat', 'system-ui', 'sans-serif'],
       }
     },
   },
