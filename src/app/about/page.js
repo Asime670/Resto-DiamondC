@@ -17,11 +17,6 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 relative z-10">
         {/* Page Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#1A120B] text-xs font-semibold text-[#E5C158]">
-            <span>✦</span>
-            <span>{t.about.tag}</span>
-            <span>✦</span>
-          </div>
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-serif gold-gradient-text tracking-tight">
             {t.about.title}
           </h1>

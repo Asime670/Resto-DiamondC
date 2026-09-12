@@ -1,6 +1,6 @@
 // Diamond C WhatsApp Integration Utility
 
-export const DEFAULT_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "237600000000";
+export const DEFAULT_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "237670199859";
 
 /**
  * Generates a pre-filled WhatsApp URL for food ordering
@@ -8,7 +8,7 @@ export const DEFAULT_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "23760000
  * 
  * @param {Object|string} dish - Dish object or dish name
  * @param {string} lang - 'en' or 'fr'
- * @param {string} phone - WhatsApp phone number with country code (defaults to 237600000000)
+ * @param {string} phone - WhatsApp phone number with country code (defaults to 237670199859)
  * @returns {string} Encoded WhatsApp URL
  */
 export function getFoodOrderUrl(dish, lang = 'en', phone = DEFAULT_PHONE) {
@@ -35,17 +35,16 @@ export function getFoodOrderUrl(dish, lang = 'en', phone = DEFAULT_PHONE) {
  *  - *Name:* [Name]
  *  - *Phone:* [Phone]
  *  - *Guests:* [Number of persons]
- *  - *Table Preference:* [Table type]
  *  - *Date & Time:* [Date & Time]"
  * 
  * @param {Object} reservation - Reservation details
  * @param {string} lang - 'en' or 'fr'
- * @param {string} phone - WhatsApp phone number with country code (defaults to 237600000000)
+ * @param {string} phone - WhatsApp phone number with country code (defaults to 237670199859)
  * @returns {string} Encoded WhatsApp URL
  */
 export function getReservationUrl(reservation, lang = 'en', phone = DEFAULT_PHONE) {
   const cleanPhone = String(phone).replace(/[^0-9]/g, '');
-  const { name, phone: guestPhone, guests, preference, dateTime, notes } = reservation || {};
+  const { name, phone: guestPhone, guests, dateTime, notes } = reservation || {};
 
   let message = '';
   if (lang === 'fr') {
@@ -53,14 +52,12 @@ export function getReservationUrl(reservation, lang = 'en', phone = DEFAULT_PHON
 - *Nom :* ${name || 'N/A'}
 - *Téléphone :* ${guestPhone || 'N/A'}
 - *Invités :* ${guests || '1 personne'}
-- *Préférence de table :* ${preference || 'Standard'}
 - *Date & Heure :* ${dateTime || 'N/A'}${notes ? `\n- *Notes particulières :* ${notes}` : ''}`;
   } else {
     message = `Hello Diamond C! I would like to make a table reservation:
 - *Name:* ${name || 'N/A'}
 - *Phone:* ${guestPhone || 'N/A'}
 - *Guests:* ${guests || '1 person'}
-- *Table Preference:* ${preference || 'Standard'}
 - *Date & Time:* ${dateTime || 'N/A'}${notes ? `\n- *Special Notes:* ${notes}` : ''}`;
   }
 

@@ -55,7 +55,7 @@ export default function Footer() {
               <div className="pt-2">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#2C1E12] text-[#E5C158] border border-[#D4AF37]/30">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  VIP Lounge Open Daily
+                  Open Daily
                 </span>
               </div>
             </div>
@@ -69,22 +69,22 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link href="/" className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5">
-                  <span className="text-xs text-[#D4AF37]">✦</span> {t.nav.home}
+                  {t.nav.home}
                 </Link>
               </li>
               <li>
                 <Link href="/menu" className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5">
-                  <span className="text-xs text-[#D4AF37]">✦</span> {t.nav.menu}
+                  {t.nav.menu}
                 </Link>
               </li>
               <li>
                 <Link href="/reservation" className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5">
-                  <span className="text-xs text-[#D4AF37]">✦</span> {t.nav.reservation}
+                  {t.nav.reservation}
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5">
-                  <span className="text-xs text-[#D4AF37]">✦</span> {t.nav.about}
+                  {t.nav.about}
                 </Link>
               </li>
               <li>
@@ -108,7 +108,7 @@ export default function Footer() {
               <p className="flex items-start gap-2.5">
                 <span className="text-[#D4AF37] mt-0.5">📞</span>
                 <a
-                  href="https://wa.me/237600000000"
+                  href="https://wa.me/237670199859"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#E5C158] transition-colors underline decoration-[#D4AF37]/40"
@@ -124,7 +124,7 @@ export default function Footer() {
               </p>
               <div className="pt-2">
                 <a
-                  href="https://wa.me/237600000000"
+                  href="https://wa.me/237670199859"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-[#D4AF37] text-black hover:bg-[#E5C158] transition-colors shadow-md shadow-[#D4AF37]/20"
@@ -143,7 +143,7 @@ export default function Footer() {
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-4">
           <p>© {new Date().getFullYear()} {t.footer.rights}</p>
           <div className="flex items-center gap-6">
-            <span className="text-zinc-500">Douala, Cameroon</span>
+            <span className="text-zinc-500">Ancienne route, Douala, Cameroon</span>
             <span>•</span>
             <span className="text-[#D4AF37]">High Luxury Dining</span>
           </div>

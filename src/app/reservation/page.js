@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { getReservationUrl, DEFAULT_PHONE } from '@/utils/whatsapp';
 import Button from '@/components/ui/Button';
@@ -13,19 +12,12 @@ export default function ReservationPage() {
     name: '',
     phone: '',
     guests: '2',
-    preference: 'Indoor',
     dateTime: '',
     notes: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [lastUrl, setLastUrl] = useState('');
-
-  const tablePreferences = [
-    { id: 'Indoor', label: t.reservation.tableIndoor, icon: '🏛️' },
-    { id: 'VIP', label: t.reservation.tableVIP, icon: '👑' },
-    { id: 'Terrace', label: t.reservation.tableTerrace, icon: '🌿' },
-  ];
 
   const guestOptions = [
     { value: '1', label: t.reservation.guest1 },
@@ -37,9 +29,6 @@ export default function ReservationPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const preferenceLabel =
-      tablePreferences.find((p) => p.id === formData.preference)?.label ||
-      formData.preference;
 
     const guestLabel =
       guestOptions.find((g) => g.value === formData.guests)?.label ||
@@ -50,7 +39,6 @@ export default function ReservationPage() {
         name: formData.name,
         phone: formData.phone,
         guests: guestLabel,
-        preference: preferenceLabel,
         dateTime: formData.dateTime,
         notes: formData.notes,
       },
@@ -75,11 +63,6 @@ export default function ReservationPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#1A120B] text-xs font-semibold text-[#E5C158]">
-            <span>✦</span>
-            <span>VIP Table Reservations</span>
-            <span>✦</span>
-          </div>
           <h1 className="text-3xl sm:text-5xl font-bold font-serif gold-gradient-text tracking-tight">
             {t.reservation.title}
           </h1>
@@ -117,7 +100,6 @@ export default function ReservationPage() {
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold bg-[#D4AF37] text-black hover:bg-[#E5C158] transition-colors shadow-md"
                   >
                     <span>{lang === 'fr' ? 'Ouvrir WhatsApp' : 'Open WhatsApp'}</span>
-                    <span>💬</span>
                   </a>
                   <Button
                     variant="outline"
@@ -201,35 +183,6 @@ export default function ReservationPage() {
                   </div>
                 </div>
 
-                {/* Table Preference */}
-                <div className="space-y-3">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-[#E5C158]">
-                    {t.reservation.tablePreference} <span className="text-red-400">*</span>
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {tablePreferences.map((pref) => {
-                      const isSelected = formData.preference === pref.id;
-                      return (
-                        <button
-                          key={pref.id}
-                          type="button"
-                          onClick={() =>
-                            setFormData({ ...formData, preference: pref.id })
-                          }
-                          className={`p-3.5 rounded-xl border text-left flex items-center gap-3 transition-all cursor-pointer ${
-                            isSelected
-                              ? 'border-[#D4AF37] bg-[#D4AF37]/15 text-[#E5C158] font-semibold shadow-md shadow-[#D4AF37]/10'
-                              : 'border-zinc-800 bg-[#0B0B0B]/60 text-zinc-300 hover:border-zinc-700'
-                          }`}
-                        >
-                          <span className="text-xl">{pref.icon}</span>
-                          <span className="text-xs sm:text-sm">{pref.label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
                 {/* Special Notes (Optional) */}
                 <div className="space-y-2">
                   <label className="text-xs font-semibold uppercase tracking-wider text-[#E5C158]">
@@ -255,7 +208,6 @@ export default function ReservationPage() {
                     className="w-full py-4 text-sm font-bold tracking-wider"
                   >
                     <span>{t.reservation.submitBtn}</span>
-                    <span className="text-lg">💬</span>
                   </Button>
                   <p className="text-[11px] text-zinc-400 text-center leading-relaxed">
                     {t.reservation.instantNotice}
@@ -267,31 +219,6 @@ export default function ReservationPage() {
 
           {/* Right Information & Lounge Details Column */}
           <div className="lg:col-span-5 space-y-6">
-            {/* VIP Lounge Card */}
-            <div className="relative rounded-3xl overflow-hidden border border-[#D4AF37]/30 shadow-2xl group">
-              <div className="relative h-64 w-full">
-                <Image
-                  src="/images/hero-bg.jpg"
-                  alt="Diamond C VIP Atmosphere"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-75"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A120B] via-black/40 to-transparent" />
-              </div>
-              <div className="p-6 bg-[#1A120B] space-y-3">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">
-                  <span>👑</span>
-                  <span>Royal VIP Hospitality</span>
-                </div>
-                <h3 className="text-xl font-bold font-serif text-white">
-                  Exclusive Private Dining & Lounge
-                </h3>
-                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-                  Tailored sommelier wine selections, bespoke multi-course Cameroonian tasting menus, and private salon discretion for dignitaries and special occasions.
-                </p>
-              </div>
-            </div>
-
             {/* Direct Telephone Concierge Callout */}
             <div className="p-6 rounded-3xl bg-gradient-to-br from-[#1A120B] to-[#2C1E12] border border-[#D4AF37]/30 space-y-4 shadow-xl">
               <div className="flex items-center gap-3">
@@ -310,7 +237,7 @@ export default function ReservationPage() {
 
               <div className="pt-2 border-t border-[#D4AF37]/20 flex items-center justify-between">
                 <span className="font-mono text-base font-bold text-white tracking-wider">
-                  +237 600 000 000
+                  +237 670 19 98 59
                 </span>
                 <a
                   href={`tel:+${DEFAULT_PHONE}`}
@@ -327,8 +254,8 @@ export default function ReservationPage() {
                 Service Schedule
               </p>
               <p>• Monday – Sunday: 8:00 AM – 11:00 PM</p>
-              <p>• VIP Lounge: Reservations recommended 2 hours in advance</p>
-              <p>• Group Banquets (9+ Guests): Dedicated event maître d&apos; provided</p>
+              <p>• Group Banquets & Events: Reservations recommended in advance</p>
+              <p>• Dedicated event maître d&apos; provided upon request</p>
             </div>
           </div>
         </div>

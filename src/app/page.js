@@ -47,13 +47,6 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center gap-6">
-          {/* Luxury Tag Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#D4AF37]/40 bg-[#1A120B]/90 text-xs sm:text-sm font-medium text-[#E5C158] shadow-lg shadow-black/50 backdrop-blur-sm">
-            <span className="text-[#D4AF37]">✦</span>
-            <span>{t.hero.tag}</span>
-            <span className="text-[#D4AF37]">✦</span>
-          </div>
-
           {/* Primary Gold Headings */}
           <div className="space-y-2">
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-serif tracking-tight gold-gradient-text drop-shadow-2xl">
@@ -88,14 +81,6 @@ export default function Home() {
             </Link>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-400 text-xs pointer-events-none">
-          <span className="tracking-widest uppercase text-[10px] text-[#D4AF37]/70">Scroll Down</span>
-          <div className="w-4 h-7 rounded-full border border-[#D4AF37]/40 flex items-start justify-center p-1">
-            <div className="w-1 h-2 bg-[#D4AF37] rounded-full animate-bounce" />
-          </div>
-        </div>
       </section>
 
       {/* 2. DIAMOND C STORY SECTION */}
@@ -103,11 +88,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Text Content */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">
-              <span>✦</span>
-              <span>{t.story.tag}</span>
-            </div>
-
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-wide">
               {t.story.title}
             </h2>
@@ -173,11 +153,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto space-y-12">
           {/* Header */}
           <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">
-              <span>✦</span>
-              <span>Signature Delicacies (90% Cameroonian)</span>
-              <span>✦</span>
-            </div>
             <h2 className="text-3xl sm:text-5xl font-bold font-serif gold-gradient-text">
               {t.preview.title}
             </h2>
