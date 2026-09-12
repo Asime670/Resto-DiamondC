@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-50: #fdfbf2;
+  --color-gold-100: #faf4db;
+  --color-gold-200: #f4e6b3;
+  --color-gold-300: #edd382;
+  --color-gold-400: #e5c158;
+  --color-gold-500: #d4af37;
+  --color-gold-600: #b58d24;
+  --color-gold-700: #916c1c;
+  --color-gold-800: #76561b;
+  --color-gold-900: #62461b;
+  --color-gold-950: #38250b;
+
+  --color-dark-950: #070707;
+  --color-dark-900: #0b0b0b;
+  --color-dark-850: #121212;
+  --color-dark-800: #1a1a1a;
+  --color-dark-700: #262626;
+
+  --color-brown-950: #120b06;
+  --color-brown-900: #1a120b;
+  --color-brown-800: #2c1e12;
+  --color-brown-700: #3d2b1f;
+  --color-brown-600: #573e2d;
+
+  --font-serif: var(--font-cinzel), serif;
+  --font-sans: var(--font-outfit), sans-serif;
+}
+
+:root {
+  --background: #070707;
+  --foreground: #f5f5f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background: #070707;
+  color: #f5f5f5;
+  font-family: var(--font-outfit), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Luxury Gold & Metallic Gradients */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fcebb6 0%, #d4af37 40%, #e5c158 70%, #996515 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #e5c158 0%, #d4af37 50%, #916c1c 100%);
+}
+
+.gold-gradient-hover:hover {
+  background: linear-gradient(135deg, #f7df8d 0%, #e5c158 50%, #b58d24 100%);
+}
+
+.gold-border {
+  border: 1px solid rgba(212, 175, 55, 0.28);
+}
+
+.gold-border-glow {
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+.glass-panel {
+  background: rgba(18, 18, 18, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.glass-panel-dark {
+  background: rgba(11, 11, 11, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.14);
+}
+
+/* Custom scrollbars for horizontal food cards */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.luxury-scrollbar::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.luxury-scrollbar::-webkit-scrollbar-track {
+  background: #121212;
+  border-radius: 9999px;
+}
+.luxury-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.4);
+  border-radius: 9999px;
+}
+.luxury-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.7);
+}
