@@ -62,17 +62,9 @@ export default function MenuPage() {
     <div className="min-h-screen bg-[#0B0B0B] text-zinc-100 py-10 sm:py-16">
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 mb-12">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#1A120B] text-xs font-semibold text-[#E5C158]">
-          <span>✦</span>
-          <span>90%+ Authentic Cameroonian Delicacies</span>
-          <span>✦</span>
-        </div>
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-serif gold-gradient-text tracking-tight">
           {t.menu.title}
         </h1>
-        <p className="text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-          {t.menu.subtitle}
-        </p>
       </div>
 
       {/* Control Bar: Day Tabs, Search & Categories */}
@@ -84,11 +76,10 @@ export default function MenuPage() {
             <button
               type="button"
               onClick={() => setSelectedDay('All')}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer ${
-                selectedDay === 'All'
-                  ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black shadow-md shadow-[#D4AF37]/25 font-bold'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
-              }`}
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer ${selectedDay === 'All'
+                ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black shadow-md shadow-[#D4AF37]/25 font-bold'
+                : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                }`}
             >
               {t.menu.allDays}
             </button>
@@ -102,20 +93,18 @@ export default function MenuPage() {
                   key={day}
                   type="button"
                   onClick={() => setSelectedDay(day)}
-                  className={`relative px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                    isSelected
-                      ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black shadow-md shadow-[#D4AF37]/25 font-bold'
-                      : 'text-zinc-400 hover:text-white hover:bg-white/5'
-                  }`}
+                  className={`relative px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${isSelected
+                    ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black shadow-md shadow-[#D4AF37]/25 font-bold'
+                    : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                    }`}
                 >
                   <span>{getDayLabel(day, lang)}</span>
                   {isToday && (
                     <span
-                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${
-                        isSelected
-                          ? 'bg-black text-[#E5C158]'
-                          : 'bg-[#D4AF37]/20 text-[#E5C158] border border-[#D4AF37]/40'
-                      }`}
+                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${isSelected
+                        ? 'bg-black text-[#E5C158]'
+                        : 'bg-[#D4AF37]/20 text-[#E5C158] border border-[#D4AF37]/40'
+                        }`}
                     >
                       {t.menu.today}
                     </span>
@@ -128,28 +117,6 @@ export default function MenuPage() {
 
         {/* Filter & Search Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          {/* Category Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1">
-            {[
-              { id: 'all', label: t.menu.filterAll },
-              { id: 'cameroonian', label: t.menu.filterCameroonian },
-              { id: 'continental', label: t.menu.filterContinental },
-              { id: 'beverages', label: t.menu.filterBeverages },
-            ].map((cat) => (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors border cursor-pointer ${
-                  selectedCategory === cat.id
-                    ? 'border-[#D4AF37] bg-[#D4AF37]/15 text-[#E5C158]'
-                    : 'border-zinc-800 bg-[#121212] text-zinc-400 hover:text-zinc-200'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
 
           {/* Search Box */}
           <div className="relative w-full sm:w-72">

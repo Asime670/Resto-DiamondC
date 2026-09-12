@@ -137,7 +137,7 @@ export default function Home() {
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              
+
               {/* Image Overlaid Badge */}
               <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl backdrop-blur-md bg-[#0B0B0B]/80 border border-[#D4AF37]/30">
                 <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">Fine Dining Douala</p>
@@ -183,9 +183,9 @@ export default function Home() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#1A120B] via-[#2C1E12] to-[#1A120B] border-t border-b border-[#D4AF37]/20">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="p-6 rounded-2xl bg-[#0B0B0B]/60 border border-[#D4AF37]/20 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-2xl shrink-0">
+            {/* <div className="w-12 h-12 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-2xl shrink-0">
               🍲
-            </div>
+            </div> */}
             <div>
               <h4 className="text-base font-bold font-serif text-[#E5C158]">Authentic Cameroonian Terroir</h4>
               <p className="text-xs text-zinc-400">Royal Achu, Eru, Poisson Braisé & Ndolé cooked with genuine ancestral spices.</p>
@@ -193,9 +193,7 @@ export default function Home() {
           </div>
 
           <div className="p-6 rounded-2xl bg-[#0B0B0B]/60 border border-[#D4AF37]/20 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-2xl shrink-0">
-              🍷
-            </div>
+
             <div>
               <h4 className="text-base font-bold font-serif text-[#E5C158]">Royal Wine & Cigar Lounge</h4>
               <p className="text-xs text-zinc-400">Exclusive private suites, fine cognac cocktails, and sommelier-selected vintages.</p>
@@ -203,9 +201,6 @@ export default function Home() {
           </div>
 
           <div className="p-6 rounded-2xl bg-[#0B0B0B]/60 border border-[#D4AF37]/20 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-2xl shrink-0">
-              💬
-            </div>
             <div>
               <h4 className="text-base font-bold font-serif text-[#E5C158]">Instant WhatsApp Concierge</h4>
               <p className="text-xs text-zinc-400">Instant table reservations and meal pre-orders directly with our dedicated maître d&apos;.</p>

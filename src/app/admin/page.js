@@ -296,9 +296,6 @@ export default function AdminPage() {
             <h1 className="text-2xl sm:text-3xl font-bold font-serif gold-gradient-text">
               {t.admin.dashboardTitle}
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#E5C158]">
-              Web Storage Active
-            </span>
           </div>
           <p className="text-xs text-zinc-400 mt-1">
             {t.admin.webStorageNotice}
@@ -471,11 +468,10 @@ export default function AdminPage() {
                         {(dish.days || []).map((d) => (
                           <span
                             key={d}
-                            className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                              d === todayName
-                                ? 'bg-[#D4AF37] text-black font-bold'
-                                : 'bg-[#0B0B0B] text-zinc-400 border border-zinc-800'
-                            }`}
+                            className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${d === todayName
+                              ? 'bg-[#D4AF37] text-black font-bold'
+                              : 'bg-[#0B0B0B] text-zinc-400 border border-zinc-800'
+                              }`}
                           >
                             {d.slice(0, 3)}
                           </span>
@@ -488,17 +484,15 @@ export default function AdminPage() {
                       <button
                         type="button"
                         onClick={() => handleToggleStock(dish.id)}
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                          dish.inStock !== false
-                            ? 'bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 hover:bg-emerald-900/80'
-                            : 'bg-red-950/80 border border-red-500/50 text-red-300 hover:bg-red-900/80'
-                        }`}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${dish.inStock !== false
+                          ? 'bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 hover:bg-emerald-900/80'
+                          : 'bg-red-950/80 border border-red-500/50 text-red-300 hover:bg-red-900/80'
+                          }`}
                         title="Click to toggle availability"
                       >
                         <span
-                          className={`w-2 h-2 rounded-full ${
-                            dish.inStock !== false ? 'bg-emerald-400' : 'bg-red-400'
-                          }`}
+                          className={`w-2 h-2 rounded-full ${dish.inStock !== false ? 'bg-emerald-400' : 'bg-red-400'
+                            }`}
                         />
                         <span>
                           {dish.inStock !== false
@@ -629,11 +623,10 @@ export default function AdminPage() {
                   key={preset.label}
                   type="button"
                   onClick={() => setFormData({ ...formData, image: preset.url })}
-                  className={`p-1.5 rounded-lg border text-[11px] text-left transition-all truncate cursor-pointer ${
-                    formData.image === preset.url
-                      ? 'border-[#D4AF37] bg-[#D4AF37]/20 text-[#E5C158] font-bold'
-                      : 'border-zinc-800 bg-[#0B0B0B] text-zinc-400 hover:text-white'
-                  }`}
+                  className={`p-1.5 rounded-lg border text-[11px] text-left transition-all truncate cursor-pointer ${formData.image === preset.url
+                    ? 'border-[#D4AF37] bg-[#D4AF37]/20 text-[#E5C158] font-bold'
+                    : 'border-zinc-800 bg-[#0B0B0B] text-zinc-400 hover:text-white'
+                    }`}
                 >
                   {preset.label}
                 </button>
@@ -663,11 +656,10 @@ export default function AdminPage() {
                     key={d}
                     type="button"
                     onClick={() => toggleDaySelection(d)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-                      checked
-                        ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black shadow-sm font-bold'
-                        : 'bg-[#0B0B0B] text-zinc-400 border border-zinc-800 hover:border-zinc-700'
-                    }`}
+                    className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${checked
+                      ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black shadow-sm font-bold'
+                      : 'bg-[#0B0B0B] text-zinc-400 border border-zinc-800 hover:border-zinc-700'
+                      }`}
                   >
                     {getDayLabel(d, lang)}
                   </button>

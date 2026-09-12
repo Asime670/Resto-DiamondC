@@ -129,7 +129,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-[#D4AF37] text-black hover:bg-[#E5C158] transition-colors shadow-md shadow-[#D4AF37]/20"
                 >
-                  <span>Chat with Concierge</span>
+                  <span>Chat on whatsapp</span>
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
