@@ -1,4 +1,5 @@
 import { initialMenuData } from '@/data/initialMenuData';
+import { DAYS_OF_WEEK } from '@/utils/days';
 
 const STORAGE_KEY = 'diamond_c_menu_items_v2';
 
@@ -46,7 +47,7 @@ export function createMenuItem(newItem) {
     ...newItem,
     id: newItem.id || `dish-${Date.now()}`,
     inStock: newItem.inStock !== false,
-    days: Array.isArray(newItem.days) && newItem.days.length > 0 ? newItem.days : ['Monday'],
+    days: Array.isArray(newItem.days) && newItem.days.length > 0 ? newItem.days : DAYS_OF_WEEK,
   };
   const updated = [itemWithId, ...items];
   saveMenuItems(updated);

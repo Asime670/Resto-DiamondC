@@ -18,6 +18,7 @@ export default function MenuPage() {
   const rowRefs = useRef({});
 
   useEffect(() => {
+    setMenuItems(getMenuItems());
     const handleMenuUpdated = () => {
       setMenuItems(getMenuItems());
     };

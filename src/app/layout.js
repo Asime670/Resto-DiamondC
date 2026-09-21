@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, Montserrat } from "next/font/google";
+import { Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { CartProvider } from "@/context/CartContext";
@@ -6,18 +6,18 @@ import Navbar from "@/components/public/Navbar";
 import Footer from "@/components/public/Footer";
 import CartDrawer from "@/components/public/CartDrawer";
 
-// Headlines — Cormorant Garamond (elegant serif)
-const cormorantGaramond = Cormorant_Garamond({
-  variable: "--font-cinzel",   // keeps existing CSS references working
+// Headlines — Playfair Display (Didot style luxury neoclassical serif)
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
-// Body / Navigation — Montserrat (clean sans-serif)
+// Body text — Montserrat
 const montserrat = Montserrat({
-  variable: "--font-outfit",   // keeps existing CSS references working
+  variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${cormorantGaramond.variable} ${montserrat.variable} h-full antialiased dark`}
+      className={`${playfair.variable} ${montserrat.variable} h-full antialiased dark`}
     >
       <body className="min-h-full flex flex-col bg-[#0B0B0B] text-zinc-100 selection:bg-[#D4AF37] selection:text-black">
         <LanguageProvider>
