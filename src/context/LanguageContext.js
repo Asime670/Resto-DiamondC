@@ -38,6 +38,16 @@ export const translations = {
       selectDayHint: 'Select a day to view daily meals',
       today: 'Today',
       orderNow: 'Order Now',
+      addToCart: 'Add to Cart',
+      inStock: 'In Stock',
+      soldOut: 'Sold Out',
+      filterAll: 'All Categories',
+      filterCameroonian: 'Cameroonian Specialties',
+      filterContinental: 'Chef Creations',
+      filterBeverages: 'Royal Drinks & Bar',
+      searchPlaceholder: 'Search a dish, ingredient...',
+      scrollHint: 'Scroll horizontally to discover meals',
+      servedOn: 'Served on:',
       emptyDishes: 'No dishes scheduled for this day yet. Check back soon or visit our Admin portal.',
     },
     reservation: {
@@ -146,6 +156,18 @@ export const translations = {
       logout: 'Log Out',
       viewSite: 'View Live Website',
       webStorageNotice: 'All changes are stored locally in your browser (Web Storage) and update the live website immediately.',
+    },
+    cart: {
+      title: 'Your Order',
+      empty: 'Your cart is empty',
+      emptyHint: 'Browse the menu and add meals to your order.',
+      items: 'item',
+      itemsPlural: 'items',
+      remove: 'Remove',
+      placeOrder: 'Place Order via WhatsApp',
+      total: 'Total',
+      clearCart: 'Clear Cart',
+      addedToCart: 'Added to cart!',
     }
   },
   fr: {
@@ -301,6 +323,18 @@ export const translations = {
       logout: 'Déconnexion',
       viewSite: 'Voir le Site en Direct',
       webStorageNotice: 'Toutes les modifications sont enregistrées localement dans votre navigateur (Web Storage) et mettent à jour le site instantanément.',
+    },
+    cart: {
+      title: 'Votre Commande',
+      empty: 'Votre panier est vide',
+      emptyHint: 'Parcourez le menu et ajoutez des plats à votre commande.',
+      items: 'plat',
+      itemsPlural: 'plats',
+      remove: 'Retirer',
+      placeOrder: 'Passer la commande via WhatsApp',
+      total: 'Total',
+      clearCart: 'Vider le panier',
+      addedToCart: 'Ajouté au panier !',
     }
   }
 };

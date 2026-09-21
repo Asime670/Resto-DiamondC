@@ -1,8 +1,10 @@
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { CartProvider } from "@/context/CartContext";
 import Navbar from "@/components/public/Navbar";
 import Footer from "@/components/public/Footer";
+import CartDrawer from "@/components/public/CartDrawer";
 
 // Headlines — Cormorant Garamond (elegant serif)
 const cormorantGaramond = Cormorant_Garamond({
@@ -52,11 +54,14 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col bg-[#0B0B0B] text-zinc-100 selection:bg-[#D4AF37] selection:text-black">
         <LanguageProvider>
-          <Navbar />
-          <main className="flex-1 flex flex-col pt-16 sm:pt-20">
-            {children}
-          </main>
-          <Footer />
+          <CartProvider>
+            <Navbar />
+            <main className="flex-1 flex flex-col pt-16 sm:pt-20">
+              {children}
+            </main>
+            <Footer />
+            <CartDrawer />
+          </CartProvider>
         </LanguageProvider>
       </body>
     </html>

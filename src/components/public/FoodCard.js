@@ -1,20 +1,28 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
-import { getFoodOrderUrl } from '@/utils/whatsapp';
+import { useCart } from '@/context/CartContext';
 
 export default function FoodCard({ dish, className = '' }) {
   const { lang, t } = useLanguage();
+  const { addToCart, setIsOpen } = useCart();
+  const [added, setAdded] = useState(false);
 
   if (!dish) return null;
 
   const dishName = lang === 'fr' ? (dish.nameFr || dish.name) : dish.name;
   const dishDesc = lang === 'fr' ? (dish.descriptionFr || dish.description) : dish.description;
   const dishBadge = lang === 'fr' ? (dish.badgeFr || dish.badge) : dish.badge;
-  const orderUrl = getFoodOrderUrl(dish, lang);
   const isInStock = dish.inStock !== false;
+
+  const handleAddToCart = () => {
+    addToCart(dish);
+    setAdded(true);
+    // Briefly flash the "added" label, then reset
+    setTimeout(() => setAdded(false), 1500);
+  };
 
   return (
     <div
@@ -81,15 +89,28 @@ export default function FoodCard({ dish, className = '' }) {
         {/* Action Button */}
         <div className="pt-2 border-t border-[#D4AF37]/15">
           {isInStock ? (
-            <a
-              href={orderUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full font-bold text-xs sm:text-sm bg-gradient-to-r from-[#D4AF37] via-[#E5C158] to-[#D4AF37] text-black hover:from-[#E5C158] hover:to-[#B58D24] shadow-md shadow-[#D4AF37]/20 hover:shadow-lg hover:shadow-[#D4AF37]/30 transition-all duration-300 active:scale-98"
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              className={`w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 cursor-pointer active:scale-95 ${
+                added
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/20'
+                  : 'bg-gradient-to-r from-[#D4AF37] via-[#E5C158] to-[#D4AF37] text-black hover:from-[#E5C158] hover:to-[#B58D24] shadow-md shadow-[#D4AF37]/20 hover:shadow-lg hover:shadow-[#D4AF37]/30'
+              }`}
             >
-              <span>{t.menu.orderNow}</span>
-              <span className="text-sm">💬</span>
-            </a>
+              {added ? (
+                <>
+                  <span>✓ {t.cart?.addedToCart || 'Added!'}</span>
+                </>
+              ) : (
+                <>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  <span>{t.menu.addToCart}</span>
+                </>
+              )}
+            </button>
           ) : (
             <button
               type="button"

@@ -63,3 +63,31 @@ export function getReservationUrl(reservation, lang = 'en', phone = DEFAULT_PHON
 
   return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
 }
+
+/**
+ * Generates a pre-filled WhatsApp URL for a multi-item cart order.
+ * Each cartItem = { dish: Object, quantity: number }
+ *
+ * @param {Array} cartItems - Array of { dish, quantity }
+ * @param {string} lang - 'en' or 'fr'
+ * @param {string} phone - WhatsApp phone number (defaults to DEFAULT_PHONE)
+ * @returns {string} Encoded WhatsApp URL
+ */
+export function getCartOrderUrl(cartItems, lang = 'en', phone = DEFAULT_PHONE) {
+  const cleanPhone = String(phone).replace(/[^0-9]/g, '');
+
+  const lines = cartItems.map(({ dish, quantity }) => {
+    const name = lang === 'fr' ? (dish.nameFr || dish.name) : dish.name;
+    const price = dish.price || '';
+    return `  • *${name}* x${quantity} — ${price}`;
+  });
+
+  let message = '';
+  if (lang === 'fr') {
+    message = `Bonjour Diamond C ! Je souhaite passer la commande suivante :\n${lines.join('\n')}\n\nMerci de confirmer ma commande.`;
+  } else {
+    message = `Hello Diamond C! I would like to place the following order:\n${lines.join('\n')}\n\nPlease confirm my order. Thank you!`;
+  }
+
+  return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+}
